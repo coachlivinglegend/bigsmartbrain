@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import HttpsApp from './HttpsApp';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'tachyons';
+import HttpsRedirect from 'react-https-redirect';
 
 
 ReactDOM.render(
-    <HttpsApp />,
+  <HttpsRedirect>
+    <App />
+  </HttpsRedirect>,
   document.getElementById('root')
 );
 
