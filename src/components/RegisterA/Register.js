@@ -55,7 +55,7 @@ class Register extends React.Component {
         const output = document.getElementById("passwordHelp");
         const password1 = event.target.value;
         if (password1.length < 6) {
-            output.textContent = "Error: Your password must be at least 6 characters long.";
+            output.textContent = "Your password must be at least 6 characters long.";
             output.style.color = "red";
         } else if (password1.length >= 6) {
             const passwordRegex = /\d/; 
