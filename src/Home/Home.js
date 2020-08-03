@@ -49,7 +49,6 @@ class Home extends React.Component {
                     <div>
                         <div className="forEvery">
                             <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/home/facedetection.jpg)" }} className="forPicture">
-                                <img/>
                             </div>
                             <div>
                                 <div className="forText">Face Detection</div>
@@ -64,7 +63,6 @@ class Home extends React.Component {
                     <div>
                     <div className="forEvery">
                         <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/home/celebrity.jpg)" }} className="forPicture">
-                            <img/>
                         </div>
                         <div>
                             <div className="forText">Celebrity</div>
@@ -79,7 +77,6 @@ class Home extends React.Component {
                         <div>
                         <div className="forEvery">
                             <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/home/demographics.jpg)" }} className="forPicture">
-                                <img/>
                             </div>
                             <div>
                                 <div className="forText">Demographics</div>
@@ -94,7 +91,6 @@ class Home extends React.Component {
                     <div>
                     <div className="forEvery">
                         <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/general.jpg)" }} className="forPicture">
-                            <img/>
                         </div>
                         <div>
                             <div className="forText">General Model</div>
@@ -109,7 +105,6 @@ class Home extends React.Component {
                     <div>
                     <div className="forEvery">
                         <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/home/color.jpg)" }}  className="forPicture">
-                            <img/>
                         </div>
                         <div>
                             <div className="forText">Color Model</div>
@@ -124,7 +119,6 @@ class Home extends React.Component {
                     <div>
                     <div className="forEvery">
                         <div style={{backgroundImage: "url(https://f.hubspotusercontent20.net/hubfs/4505120/home/apparel-detection.jpg)" }} className="forPicture">
-                            <img/>
                         </div>
                         <div>
                             <div className="forText">Apparel Detection</div>
