@@ -153,9 +153,9 @@ class Home extends React.Component {
                     <div className="sectionwrapper1">
                         <div className="logo">
                             <div className="logopicture"><img alt='' src={logo}/></div>
-                            <div className="menubar"> <HamburgerMenu isOpen={this.state.open} menuClicked={this.handleMenuClick} className="menu" width={18} height={15} color='#149df2'/> </div>
+                            <div className="menubar"><span onClick={this.handleMenuClick} className="menu"><i class="fa fa-bars"></i></span></div>
                         </div>
-
+                        {/* <HamburgerMenu isOpen={this.state.open} menuClicked={this.handleMenuClick} className="menu" width={18} height={15} color='#149df2'/> */}
                         <ul className="navlinks" id="myTopnav">
                             <li onClick={() => this.onRouteChange('face')}  className="display">Face Model</li>
                             <li onClick={() => this.onRouteChange('celeb')} className="display">Celebrity Model</li>

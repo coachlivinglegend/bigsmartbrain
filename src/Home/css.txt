@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 nav{
     left: 0%;
     top: 0%;
@@ -19,21 +12,13 @@ nav{
 
 .Tilt {
     /* background: linear-gradient(to right, rgb(204, 65, 109), rgb(34, 195, 244));; */
-    background: -webkit-gradient(linear, left top, right top, from(rgb(234, 53, 72)), to(rgb(153, 167, 252)));
-    background: -o-linear-gradient(left, rgb(234, 53, 72), rgb(153, 167, 252));
     background: linear-gradient(to right, rgb(234, 53, 72), rgb(153, 167, 252));
 }
 
 .sectionwrapper1{
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: space-between;
+    align-items: center;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -46,20 +31,12 @@ nav{
 }
 
 .logo{
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logopicture{
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     height: 45px;
     width: 60px
@@ -71,14 +48,9 @@ nav{
 
 ul {
     list-style: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 li:hover{
@@ -88,16 +60,9 @@ li:hover{
 .forEvery {
     width: 90%;
     height: 100%;
-    display: -webkit-box !important;
-    display: -ms-flexbox !important;
     display: flex !important;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-between;
     background: white;
     margin: 10px auto;
     border-radius: 10px;
@@ -105,10 +70,7 @@ li:hover{
 
 @media only screen and (min-width: 600px) {
     .forEvery {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
+        flex-direction: row;
         width: 100%;
     }
 
@@ -150,7 +112,10 @@ li{
 
 .menu {
     display: none;
-    color: #149df2;
+}
+
+.navlinks hr{
+    display: none;
 }
 
 
@@ -174,19 +139,13 @@ li{
     }
 
     .sectionwrapper1{
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: column;
-                flex-direction: column;
+        flex-direction: column;
         height: 50px;
         margin: 0;
         
     }
     ul{
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-              flex-direction: column;
+      flex-direction: column;
       padding-left: 0;
       background-color: white;
       width: 100%;
