@@ -41,7 +41,7 @@ class ImageLinkForm extends React.Component {
                             <button onClick={onButtonSubmit} className='w-30 grow f4 link ph3 pv2 dib white bg-light-purple'>Detect</button>
                         </div>
                         <div>
-                            <p>Alternatively, you can upload files.<input onChange={stuff} type="file" id="fileInput" accept=".jpg, .jpeg, .png"/></p> 
+                            <p>Alternatively, you can upload files.<input onChange={stuff} type="file" id="input_img" accept=".jpg, .jpeg, .png"/></p> 
                         </div>
                     </div>
                 </div>
