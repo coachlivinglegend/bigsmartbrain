@@ -23,9 +23,6 @@ class Home extends React.Component {
     }
 
     handleMenuClick = () => {
-        this.setState({
-            open: !this.state.open
-        });
         var x = document.getElementById("myTopnav");
         if (x.className === "navlinks") {
           x.className += " responsive";
