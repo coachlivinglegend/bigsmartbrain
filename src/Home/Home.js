@@ -6,10 +6,8 @@ import ApparelDetection from '../components/ApparelDetection/ApparelDetection';
 import DemoDetection from '../components/DemoDetection/DemoDetection';
 import GenModel from '../components/GeneralModel/GenModel.js';
 import ColorModel from '../components/ColorModel/ColorModel.js'
-import HamburgerMenu from 'react-hamburger-menu';
-import logo from './loogo.jpg'
-import Tilt from 'react-tilt'
 import Brain from './brain.png'
+import HamburgerMenu from 'react-hamburger-menu'
 
 
 
@@ -17,12 +15,15 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            open: false,
             navRoute: '',
-            open: false
         }
     }
 
     handleMenuClick = () => {
+        this.setState({
+            open: !this.state.open
+        });
         var x = document.getElementById("myTopnav");
         if (x.className === "navlinks") {
           x.className += " responsive";
@@ -128,7 +129,7 @@ class Home extends React.Component {
             default: 
             return (
                 <div>
-                    <div className="modelText">
+                    <div style={{borderRadius: 5}} className="modelText">
                         <h3>MODEL GALLERY</h3>
                         <h2>Get started with advanced pre-trained models</h2>
                         <h4>Explore pre-built, ready-to-use image recognition models to suit your specific needs.</h4>
@@ -149,10 +150,11 @@ class Home extends React.Component {
                 <nav>
                     <div className="sectionwrapper1">
                         <div className="logo">
-                            <div className="logopicture"><img alt='' src={logo}/></div>
-                            <div className="menubar"><span onClick={this.handleMenuClick} className="menu"><i class="fa fa-bars"></i></span></div>
+                            <div className="logopicture"><img alt='' src={Brain}/></div>
+                            <div className="menubar"><HamburgerMenu isOpen={this.state.open} menuClicked={this.handleMenuClick} className="menu" width={18} height={15} color='#149df2'/></div>
                         </div>
-                        {/* <HamburgerMenu isOpen={this.state.open} menuClicked={this.handleMenuClick} className="menu" width={18} height={15} color='#149df2'/> */}
+                        
+                        {/* <span onClick={this.handleMenuClick} className="menu"><i class="fa fa-bars"></i></span> */}
                         <ul className="navlinks" id="myTopnav">
                             <li onClick={() => this.onRouteChange('face')}  className="display">Face Model</li>
                             <li onClick={() => this.onRouteChange('celeb')} className="display">Celebrity Model</li>
@@ -171,14 +173,6 @@ class Home extends React.Component {
                         <h1>Welcome, {this.props.name}!</h1>
                     </div>
 
-                    <div className='ma4 mt0'>
-                        <Tilt className="Tilt br2 shadow-2" options={{ max : 45 }} style={{ height: 150, width: 150 }} >
-                            <div className="Tilt-inner pa3">
-                                <img style={{paddingTop: '5px'}} src={Brain} alt='logo'/>
-                            </div>
-                        </Tilt>
-                    </div>
-
                     <div style={{textAlign: "center"}}><h2>You have successfully submitted <span>{this.props.rank}</span> entries.</h2></div>
 
                     {   
@@ -187,6 +181,8 @@ class Home extends React.Component {
 
 
                 </div>
+
+                <footer style = {{color: "#252161", justifyContent: "center", textAlign: "center", display: "flex", alignItems: "center", height: 45, marginTop: 15, background: "white"}}>Designed by Daniel Beckley using Clarifai's API. &copy; 2020.</footer>
             </div>
         )
     }

@@ -35,7 +35,7 @@ const initialState = {
     boxGen: [ ],
     boxColor: [ ],
     boxDemo: [ ],
-    route: '',
+    route: 'home',
     user: {
       id: '',
       name: '',

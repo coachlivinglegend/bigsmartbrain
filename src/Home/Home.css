@@ -31,9 +31,6 @@
 .bodyWrapper {
     padding: 0 15px;
 }    
-.Tilt {
-    background: linear-gradient(to right, rgb(234, 53, 72), rgb(153, 167, 252));
-}    
 
 nav{
     background-color: white;
@@ -46,7 +43,6 @@ nav{
     align-items: center;
     margin-left: 10px;
     margin-right: 10px;
-    /* height: 60px; */
 }    
 
 .modelText {
