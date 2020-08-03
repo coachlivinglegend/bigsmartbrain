@@ -29,13 +29,13 @@ const initialState = {
     input: '',
     imageUrl: '',
     selectedFile: null,
-    boxFace: [ ],
-    boxCeleb: [ ],
-    boxApp: [ ],
-    boxGen: [ ],
-    boxColor: [ ],
-    boxDemo: [ ],
-    route: '',
+    boxFace: [],
+    boxCeleb: [],
+    boxApp: [],
+    boxDemo: [],
+    boxGen: [],
+    boxColor: [],
+    route: 'home',
     user: {
       id: '',
       name: '',
@@ -61,27 +61,6 @@ class App extends React.Component {
     }})
   }
 
-  stuff = (event) => {
-    const fileList = event.target.files;
-    let file = fileList[0];
-    if (file.type && file.type.indexOf('image') === -1) {
-        console.log('File is not an image.', file.type, file);
-        return;
-      }
-      const reader = new FileReader();
-      reader.addEventListener('load', (event) => {
-          const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
-          const body = new FormData();
-          body.append("image", encoded)
-          fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-            method: "POST",
-            body,
-          })
-          .then(response => response.json())
-          .then(response => this.setState({input: response.data.display_url}))
-      });
-      reader.readAsDataURL(file);
-  } 
 
   onRouteChange = (route) => {
     if (route === 'signin') {
@@ -105,51 +84,11 @@ class App extends React.Component {
         leftCol: (clarifaiFace.left_col * width) + ((borderWidth - width) / 2),
         topRow: (clarifaiFace.top_row * height) + ((borderHeight - height) / 2),
         rightCol: (width - (clarifaiFace.right_col * width)) + ((borderWidth - width) / 2),
-        bottomRow: (height - (clarifaiFace.bottom_row * height)) + ((borderHeight - height) / 2),
-  
-        // leftCol: clarifaiFace.left_col * width,
-        // topRow: (clarifaiFace.top_row * height) + ((350 - height) / 2),
-        // rightCol: width - (clarifaiFace.right_col * width),
-        // bottomRow: (height - (clarifaiFace.bottom_row * height)) + ((350 - height) / 2),
+        bottomRow: (height - (clarifaiFace.bottom_row * height)) + ((borderHeight - height) / 2),  
       }
       allFaces.push(aFace)
     }
     return allFaces
-  }
-
-  onInputChange = (event) => {
-    this.setState({input: event.target.value})
-  }
-
-  onButtonSubmit = (event) => {
-    event.preventDefault();
-    this.setState({imageUrl: this.state.input});
-    fetch('https://boiling-lake-36219.herokuapp.com/imageurl', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-          input: this.state.input
-      })
-    })
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        fetch('https://boiling-lake-36219.herokuapp.com/image', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-              id: this.state.user.id
-          })
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState(Object.assign(this.state.user, { entries: data}))
-      })
-      .catch(err => console.log(err))
-      };
-      this.setState({box : this.calculateFaceLocation(response)})
-    })
-    .catch(err => console.error(err))
   }
 
   faceDetection = (event) => {
@@ -162,24 +101,31 @@ class App extends React.Component {
       const reader = new FileReader();
       reader.addEventListener('load', (event) => {
           const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
-          const body = new FormData();
-          body.append("image", encoded)
-          fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-            method: "POST",
-            body,
-          })
-          .then(response => response.json())
-          .then(response => {
-            this.setState({imageUrl: response.data.display_url});
-            fetch('https://boiling-lake-36219.herokuapp.com/imageurl', {
-              method: 'post',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({
-                  input: response.data.display_url
-              })
-            })
-            .then(response => response.json())
-            .then(response => {
+
+          this.setState({boxFace: [ ]});
+          this.setState({boxCeleb: [ ]});
+          this.setState({boxApp: [ ]});
+          this.setState({boxDemo: [ ]});
+          this.setState({boxGen: [ ]});
+          this.setState({boxColor: [ ]});
+
+            this.setState({imageUrl: event.target.result});
+
+
+            // fetch('https://boiling-lake-36219.herokuapp.com/imageurl', {
+            //   method: 'post',
+            //   headers: {'Content-Type': 'application/json'},
+            //   body: JSON.stringify({
+            //       input: encoded
+            //   })
+            // })
+            // .then(response => response.json())
+            // .then(response => {
+
+              app.models
+              .predict(Clarifai.FACE_DETECT_MODEL, encoded)
+              .then(response => {
+
               if (response) {
                 fetch('https://boiling-lake-36219.herokuapp.com/image', {
                   method: 'put',
@@ -198,8 +144,8 @@ class App extends React.Component {
             })
             .catch(err => console.error(err))
         
-          })
-      });
+
+          });
       reader.readAsDataURL(file);
 }
 
@@ -213,21 +159,19 @@ detectCeleb = (event) => {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
         const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
-        const body = new FormData();
-        body.append("image", encoded)
-        fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-          method: "POST",
-          body,
-        })
-        .then(response => response.json())
-        .then(response => {
-          this.setState({imageUrl: response.data.display_url});
+          this.setState({boxFace: [ ]});
+          this.setState({boxCeleb: [ ]});
+          this.setState({boxApp: [ ]});
+          this.setState({boxDemo: [ ]});
+          this.setState({boxGen: [ ]});
+          this.setState({boxColor: [ ]});
+
+          this.setState({imageUrl: event.target.result});
           app.models.predict(
             Clarifai.CELEBRITY_MODEL,
-          response.data.display_url)
+          encoded)
           .then(response => {
             if (response) {
-              console.log(response)
               fetch('https://boiling-lake-36219.herokuapp.com/image', {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
@@ -245,7 +189,6 @@ detectCeleb = (event) => {
           })
           .catch(err => console.error(err))
       
-        })
     });
     reader.readAsDataURL(file);
 }
@@ -269,13 +212,18 @@ detectApparel = (event) => {
         // })
         // .then(response => response.json())
         // .then(response => {
+          this.setState({boxFace: [ ]});
+          this.setState({boxCeleb: [ ]});
+          this.setState({boxApp: [ ]});
+          this.setState({boxDemo: [ ]});
+          this.setState({boxGen: [ ]});
+          this.setState({boxColor: [ ]});
           this.setState({imageUrl: event.target.result});
           app.models.predict(
           "72c523807f93e18b431676fb9a58e6ad",
-          {base64: encoded})
+          encoded)
           .then(response => {
             if (response) {
-              console.log(response)
               fetch('https://boiling-lake-36219.herokuapp.com/image', {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
@@ -309,21 +257,19 @@ detectDemo = (event) => {
     reader.addEventListener('load', (event) => {
         const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
 
-        // const body = new FormData();
-        // body.append("image", encoded)
-        // fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-        //   method: "POST",
-        //   body,
-        // })
-        // .then(response => response.json())
-        // .then(response => {
+          this.setState({boxFace: [ ]});
+          this.setState({boxCeleb: [ ]});
+          this.setState({boxApp: [ ]});
+          this.setState({boxDemo: [ ]});
+          this.setState({boxGen: [ ]});
+          this.setState({boxColor: [ ]});
+
           this.setState({imageUrl: event.target.result});
           app.models.predict(
           "c0c0ac362b03416da06ab3fa36fb58e3",
-          {base64: encoded})
+          encoded)
           .then(response => {
             if (response) {
-              console.log(response)
               fetch('https://boiling-lake-36219.herokuapp.com/image', {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
@@ -341,7 +287,6 @@ detectDemo = (event) => {
           })
           .catch(err => console.error(err))
       
-        // })
     });
     reader.readAsDataURL(file);
 }
@@ -411,11 +356,9 @@ calculateDemoLocation = (data) => {
     const sexConcept = clarifaiOtherData.filter((data) => {
       return data.name.includes("ine")
     })
-    console.log(sexConcept)
     const originConcept = clarifaiOtherData.filter((data) => {
       return (data.vocab_id.includes("multi"))
     })
-    console.log(originConcept)
     
     const aFace = {
       id: Date.now(),
@@ -438,7 +381,6 @@ calculateDemoLocation = (data) => {
     }
     allFaces.push(aFace)
   }
-  console.log(allFaces)
   return allFaces
 }
 
@@ -453,24 +395,19 @@ detectColor = (event) => {
     reader.addEventListener('load', (event) => {
         const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
 
-        // const body = new FormData();
-        // body.append("image", encoded)
-        // fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-        //   method: "POST",
-        //   body,
-        // })
-        // .then(response => response.json())
-        // .then(response => {
+          this.setState({boxFace: [ ]});
+          this.setState({boxCeleb: [ ]});
+          this.setState({boxApp: [ ]});
+          this.setState({boxDemo: [ ]});
+          this.setState({boxGen: [ ]});
+          this.setState({boxColor: [ ]});
 
           this.setState({imageUrl: event.target.result});
-
           app.models.predict(
             "eeed0b6733a644cea07cf4c60f87ebb7",
             encoded)
             .then(response => {  
-
                 if (response) {
-                  console.log(response)
                   fetch('https://boiling-lake-36219.herokuapp.com/image', {
                     method: 'put',
                     headers: {'Content-Type': 'application/json'},
@@ -487,7 +424,6 @@ detectColor = (event) => {
                 this.setState({boxColor : this.calculateColor(response)})
               })
           })      
-        // })
     reader.readAsDataURL(file);
 }
 
@@ -502,24 +438,19 @@ detectGeneral = (event) => {
     reader.addEventListener('load', (event) => {
         const encoded = event.target.result.toString().replace(/^data:(.*,)?/, '');
 
-        // const body = new FormData();
-        // body.append("image", encoded)
-        // fetch("https://api.imgbb.com/1/upload?key=cedce0217ec47237a7769c5c5a633cb7", {
-        //   method: "POST",
-        //   body,
-        // })
-        // .then(response => response.json())
-        // .then(response => {
+        this.setState({boxFace: [ ]});
+        this.setState({boxCeleb: [ ]});
+        this.setState({boxApp: [ ]});
+        this.setState({boxDemo: [ ]});
+        this.setState({boxGen: [ ]});
+        this.setState({boxColor: [ ]});
 
-
-          this.setState({imageUrl: event.target.result});
-
+        this.setState({imageUrl: event.target.result});
 
           app.models.initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
           .then(generalModel => generalModel.predict(encoded))
           .then(response => {
                 if (response) {
-                  console.log(response)
                   fetch('https://boiling-lake-36219.herokuapp.com/image', {
                     method: 'put',
                     headers: {'Content-Type': 'application/json'},
@@ -536,7 +467,6 @@ detectGeneral = (event) => {
                 this.setState({boxGen : this.calculateGeneralModel(response)})
               })
           })      
-        // })
     reader.readAsDataURL(file);
 }
 
@@ -552,7 +482,6 @@ calculateColor = (data) => {
     }
     allFaces.push(aFace)
   }
-  console.log(allFaces)
   return allFaces
 }
 
@@ -567,7 +496,6 @@ calculateGeneralModel = (data) => {
     }
     allFaces.push(aFace)
   }
-  console.log(allFaces)
   return allFaces
 }
 

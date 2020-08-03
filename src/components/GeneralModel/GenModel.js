@@ -26,8 +26,8 @@ class GenModel extends React.Component {
                         }
                     </div>
     
-                    <input onChange={stuff} type="file" name="file" id="file" class="inputfile" accept=".jpg, .jpeg, .png"/>
-                    <label className="" for="file">Upload a picture</label>
+                    <input onChange={stuff} type="file" name="file" id="file" className="inputfile" accept=".jpg, .jpeg, .png"/>
+                    <label className="" htmlFor="file">Upload a picture</label>
     
                 </div>
     
