@@ -46,6 +46,7 @@ nav{
     align-items: center;
     margin-left: 10px;
     margin-right: 10px;
+    /* height: 60px; */
 }    
 
 .modelText {
@@ -88,7 +89,6 @@ li{
     margin-bottom: 0.625rem;
     color: #252161;
     font-weight: 600;
-    
 }
 
 .menu {
@@ -112,25 +112,19 @@ li{
     }
     .logo{
         width: 100%;
-        padding: 0px 15px 0 15px;
     }
     .sectionwrapper1{
         flex-direction: column;
-        height: 50px;
-        margin: 0;
-        
     }
+    
     ul{
         flex-direction: column;
-      padding-left: 0;
-      background-color: white;
-      width: 100%;
-      margin-top: 0;
+        padding-left: 0;
+        margin-top: 0;
+        margin-bottom: 0;
 
     }    
 }
-
-
 
 
     @media only screen and (min-width: 600px) {
