@@ -17,12 +17,21 @@ class GenModel extends React.Component {
                 <div className="outputresponse">
                     <div className="outputinfo">
                     <div className="outputDetails"><div className="titleData">Predicted Concept</div><div className="titleData">Probability</div></div>
-                        {
-                            box.map((aFace) => {
-                                return (
-                                    <div className="outputDetails"><div className="bodyData">{aFace.concept}</div> <div className="bodyData">{aFace.probs}</div></div>
-                                )
-                            })
+                        {   
+                            this.props.isLoading 
+                                    ? 
+                                    (
+                                        <div style={{marginTop: 30}} className='spinner-overlay'>
+                                            <div className='spinner-container' />
+                                        </div>
+
+                                    )
+                                    :
+                                        box.map((aFace) => {
+                                            return (
+                                                <div className="outputDetails"><div className="bodyData">{aFace.concept}</div> <div className="bodyData">{aFace.probs}</div></div>
+                                            )
+                                        })
                         }
                     </div>
     

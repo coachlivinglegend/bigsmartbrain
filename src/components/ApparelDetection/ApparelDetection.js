@@ -13,7 +13,6 @@ class ApparelDetection extends React.Component {
                             {
                                 box.map((aFace) => {
                                     const height = 510 - aFace.bottomRow - aFace.topRow
-                                    console.log(height)
                                     return (
                                         <div className="boundingBox" key={aFace.id} style={{top: aFace.topRow, right: aFace.rightCol, bottom: aFace.bottomRow, left: aFace.leftCol}}>
                                         <label className='box-label' style={{ bottom: height }}>
@@ -31,12 +30,23 @@ class ApparelDetection extends React.Component {
                 <div className="outputresponse">
                     <div className="outputinfo">
                     <div className="outputDetails"><div className="titleData">Predicted Concept</div><div className="titleData">Probability</div></div>
-                        {
-                            box.map((aFace) => {
-                                return (
-                                    <div className="outputDetails"><div className="bodyData">{aFace.celebName}</div> <div className="bodyData">{aFace.probs}</div></div>
-                                )
-                            })
+                        {   
+                            this.props.isLoading 
+                                    ? 
+                                    (
+                                        <div style={{marginTop: 30}} className='spinner-overlay'>
+                                            <div className='spinner-container' />
+                                        </div>
+
+                                    )
+                                    :
+                                    (
+                                        box.map((aFace) => {
+                                            return (
+                                                <div className="outputDetails"><div className="bodyData">{aFace.celebName}</div> <div className="bodyData">{aFace.probs}</div></div>
+                                            )
+                                        })
+                                    )
                         }
                     </div>
     

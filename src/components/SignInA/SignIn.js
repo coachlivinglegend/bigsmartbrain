@@ -9,10 +9,12 @@ class SignIn extends React.Component {
         this.state = {
             signInEmail: '',
             signInPassword: '',
+            isLoading: false,
         }
     }
 
     onSubmitSignIn = () => {
+        this.setState({isLoading: true})
         fetch('https://boiling-lake-36219.herokuapp.com/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -23,16 +25,21 @@ class SignIn extends React.Component {
         })
         .then(response => response.json())
         .then(thisUser => {
+            this.setState({isLoading: false})
             if (thisUser.id)  {
                 this.props.loadUser(thisUser)
                 this.props.onRouteChange('home')
-            } else if (thisUser == "incorrect password") {
+            } else if (thisUser === "incorrect password") {
                 const output = document.getElementById("passwordHelp")
                 output.textContent = "Incorrect Password."
                 output.style.color = "red";
-            } else if (thisUser == "incorrect email.") {
+            } else if (thisUser === "incorrect email") {
                 const output = document.getElementById("passwordHelp")
-                output.textContent = "Email does not exist."
+                output.textContent = "Email is not registered."
+                output.style.color = "red";
+            } else if (thisUser === "incorrect form submission") {
+                const output = document.getElementById("passwordHelp")
+                output.textContent = "Cannot submit empty fields."
                 output.style.color = "red";
             } else {
                 const output = document.getElementById("passwordHelp")
@@ -56,11 +63,22 @@ class SignIn extends React.Component {
                         <h4>Sign in to continue.</h4>
     
     
-                        <div>
+                        <div style={{height: 215}}>
                             <div className="wrapperrhs">
                             <div className="txtbox"> <input onChange={this.onEmailChange} type="email" name="email-address" id="email-address" placeholder="Email Address" required/> </div>
                             <div className="txtbox"><input onChange={this.onPasswordChange} type="password" name="password" id="password" placeholder="Password" required/> </div>
-                            <p id="passwordHelp"></p>
+                            <div> 
+                                {this.state.isLoading 
+                                    ? 
+                                    (
+                                        <div className='spinner-overlay'>
+                                            <div className='spinner-container' />
+                                        </div>
+
+                                    )
+                                    : <span id="passwordHelp"></span>
+                                } 
+                            </div>
                             </div>
                         </div>
     

@@ -35,6 +35,7 @@ const initialState = {
     boxDemo: [],
     boxGen: [],
     boxColor: [],
+    isLoading: false,
     route: '',
     user: {
       id: '',
@@ -82,7 +83,7 @@ class App extends React.Component {
     for (let i=0; i < data.outputs[0].data.regions.length; i++) {
       let clarifaiFace = data.outputs[0].data.regions[i].region_info.bounding_box
       const aFace = {
-        id: Date.now(),
+        id: Math.floor(Math.random() * 5000000000000),
         leftCol: (clarifaiFace.left_col * width) + ((borderWidth - width) / 2),
         topRow: (clarifaiFace.top_row * height) + ((borderHeight - height) / 2),
         rightCol: (width - (clarifaiFace.right_col * width)) + ((borderWidth - width) / 2),
@@ -90,6 +91,7 @@ class App extends React.Component {
       }
       allFaces.push(aFace)
     }
+    this.setState({isLoading: false})
     return allFaces
   }
 
@@ -112,6 +114,8 @@ class App extends React.Component {
           this.setState({boxColor: [ ]});
 
             this.setState({imageUrl: event.target.result});
+            this.setState({isLoading: true})
+
 
 
             // fetch('https://boiling-lake-36219.herokuapp.com/imageurl', {
@@ -169,6 +173,8 @@ detectCeleb = (event) => {
           this.setState({boxColor: [ ]});
 
           this.setState({imageUrl: event.target.result});
+          this.setState({isLoading: true})
+
           app.models.predict(
             Clarifai.CELEBRITY_MODEL,
           encoded)
@@ -221,6 +227,8 @@ detectApparel = (event) => {
           this.setState({boxGen: [ ]});
           this.setState({boxColor: [ ]});
           this.setState({imageUrl: event.target.result});
+          this.setState({isLoading: true})
+
           app.models.predict(
           "72c523807f93e18b431676fb9a58e6ad",
           encoded)
@@ -267,6 +275,8 @@ detectDemo = (event) => {
           this.setState({boxColor: [ ]});
 
           this.setState({imageUrl: event.target.result});
+          this.setState({isLoading: true})
+
           app.models.predict(
           "c0c0ac362b03416da06ab3fa36fb58e3",
           encoded)
@@ -305,7 +315,7 @@ calculateCelebLocation = (data) => {
     let clarifaiFace = data.outputs[0].data.regions[i].region_info.bounding_box
     let clarifaiData = data.outputs[0].data.regions[i].data.concepts[0]
     const aFace = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 5000000000000),
       leftCol: (clarifaiFace.left_col * width) + ((borderWidth - width) / 2),
       topRow: (clarifaiFace.top_row * height) + ((borderHeight - height) / 2),
       rightCol: (width - (clarifaiFace.right_col * width)) + ((borderWidth - width) / 2),
@@ -315,6 +325,7 @@ calculateCelebLocation = (data) => {
     }
     allFaces.push(aFace)
   }
+  this.setState({isLoading: false})
   return allFaces
 }
 
@@ -329,7 +340,7 @@ calculateAppLocation = (data) => {
     let clarifaiFace = data.outputs[0].data.regions[i].region_info.bounding_box
     let clarifaiData = data.outputs[0].data.regions[i].data.concepts[0]
     const aFace = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 5000000000000),
       leftCol: (clarifaiFace.left_col * width) + ((borderWidth - width) / 2),
       topRow: (clarifaiFace.top_row * height) + ((borderHeight - height) / 2),
       rightCol: (width - (clarifaiFace.right_col * width)) + ((borderWidth - width) / 2),
@@ -339,6 +350,7 @@ calculateAppLocation = (data) => {
     }
     allFaces.push(aFace)
   }
+  this.setState({isLoading: false})
   return allFaces
 }
 calculateDemoLocation = (data) => {
@@ -363,7 +375,7 @@ calculateDemoLocation = (data) => {
     })
     
     const aFace = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 5000000000000),
       leftCol: (clarifaiFace.left_col * width) + ((borderWidth - width) / 2),
       topRow: (clarifaiFace.top_row * height) + ((borderHeight - height) / 2),
       rightCol: (width - (clarifaiFace.right_col * width)) + ((borderWidth - width) / 2),
@@ -383,6 +395,7 @@ calculateDemoLocation = (data) => {
     }
     allFaces.push(aFace)
   }
+  this.setState({isLoading: false})
   return allFaces
 }
 
@@ -405,6 +418,8 @@ detectColor = (event) => {
           this.setState({boxColor: [ ]});
 
           this.setState({imageUrl: event.target.result});
+          this.setState({isLoading: true})
+
           app.models.predict(
             "eeed0b6733a644cea07cf4c60f87ebb7",
             encoded)
@@ -448,6 +463,8 @@ detectGeneral = (event) => {
         this.setState({boxColor: [ ]});
 
         this.setState({imageUrl: event.target.result});
+        this.setState({isLoading: true})
+
 
           app.models.initModel({id: Clarifai.GENERAL_MODEL, version: "aa7f35c01e0642fda5cf400f543e7c40"})
           .then(generalModel => generalModel.predict(encoded))
@@ -477,13 +494,14 @@ calculateColor = (data) => {
   for (let i=0; i < data.outputs[0].data.colors.length; i++) {
     let clarifaiData = data.outputs[0].data.colors[i]
     const aFace = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 5000000000000),
       colorName: clarifaiData.w3c.name,
       colorHex: clarifaiData.raw_hex,
       probs: `${Math.round(clarifaiData.value * 100)}%`,
     }
     allFaces.push(aFace)
   }
+  this.setState({isLoading: false})
   return allFaces
 }
 
@@ -492,12 +510,13 @@ calculateGeneralModel = (data) => {
   for (let i=0; i < data.outputs[0].data.concepts.length; i++) {
     let clarifaiData = data.outputs[0].data.concepts[i]
     const aFace = {
-      id: Date.now(),
+      id: Math.floor(Math.random() * 5000000000000),
       concept: clarifaiData.name,
       probs: `${Math.round(clarifaiData.value * 100)}%`,
     }
     allFaces.push(aFace)
   }
+  this.setState({isLoading: false})
   return allFaces
 }
 
@@ -511,6 +530,7 @@ renderSwitch = (param) => {
     return (
     <Home
       name={this.state.user.name}
+      isLoading={this.state.isLoading}
       rank={this.state.user.rank}
       entries={this.state.user.entries}
       boxFace={this.state.boxFace}

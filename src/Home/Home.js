@@ -53,7 +53,7 @@ class Home extends React.Component {
                                 <div className="forData">Detect the location of faces with bounding boxes.</div>
                             </div>
                         </div>
-                        <FaceDetection box={this.props.boxFace} imageUrl={this.props.imageUrl} stuff={this.props.faceDetection}/>
+                        <FaceDetection isLoading={this.props.isLoading} box={this.props.boxFace} imageUrl={this.props.imageUrl} stuff={this.props.faceDetection}/>
                     </div>
                 )
             case "celeb":
@@ -67,7 +67,7 @@ class Home extends React.Component {
                             <div className="forData">Identify celebrities that closely resemble detected faces.</div>
                         </div>
                     </div>
-                    <CelebRecognition box={this.props.boxCeleb} imageUrl={this.props.imageUrl} stuff={this.props.celebDetection}/>
+                    <CelebRecognition isLoading={this.props.isLoading} box={this.props.boxCeleb} imageUrl={this.props.imageUrl} stuff={this.props.celebDetection}/>
                 </div>
                 )
                 case "demo":
@@ -81,7 +81,7 @@ class Home extends React.Component {
                                 <div className="forData">Predict the age, gender or cultural appearances of faces.</div>
                             </div>
                         </div>
-                        <DemoDetection box={this.props.boxDemo} imageUrl={this.props.imageUrl} stuff={this.props.demoDetection}/>
+                        <DemoDetection isLoading={this.props.isLoading} box={this.props.boxDemo} imageUrl={this.props.imageUrl} stuff={this.props.demoDetection}/>
                         </div>
                     )
             case "gen":
@@ -95,7 +95,7 @@ class Home extends React.Component {
                             <div className="forData">Recognize over 11,000 different concepts including objects, themes, moods and more.</div>
                         </div>
                     </div>
-                    <GenModel box={this.props.boxGen} imageUrl={this.props.imageUrl} stuff={this.props.generalDetection}/>
+                    <GenModel isLoading={this.props.isLoading} box={this.props.boxGen} imageUrl={this.props.imageUrl} stuff={this.props.generalDetection}/>
                     </div>
                 )
             case "color":
@@ -109,7 +109,7 @@ class Home extends React.Component {
                             <div className="forData">Identify the dominant colors present in your images in hex or W3C.</div>
                         </div>
                     </div>
-                    <ColorModel box={this.props.boxColor} imageUrl={this.props.imageUrl} stuff={this.props.colorDetection}/>
+                    <ColorModel isLoading={this.props.isLoading} box={this.props.boxColor} imageUrl={this.props.imageUrl} stuff={this.props.colorDetection}/>
                     </div>
                 )
             case "app":
@@ -123,7 +123,7 @@ class Home extends React.Component {
                             <div className="forData">Detect items of clothing or fashion-related items.</div>
                         </div>
                     </div>
-                    <ApparelDetection box={this.props.boxApp} imageUrl={this.props.imageUrl} stuff={this.props.apparelDetection}/>
+                    <ApparelDetection isLoading={this.props.isLoading} box={this.props.boxApp} imageUrl={this.props.imageUrl} stuff={this.props.apparelDetection}/>
                     </div>
                 )
             default: 

@@ -17,18 +17,30 @@ class ColorModel extends React.Component {
                 <div className="outputresponse">
                     <div className="outputinfo">
                         {
-                            box.map((aData) => {
-                                return (
-                                    <div className = "colorDiv" style={{background:aData.colorHex}}>
-                                        <div>
-                                        {aData.colorName} {aData.colorHex}
+                            this.props.isLoading 
+                                    ? 
+                                    (
+                                        <div style={{marginTop: 30}} className='spinner-overlay'>
+                                            <div className='spinner-container' />
                                         </div>
-                                        <div>
-                                        {aData.probs}
-                                        </div>
-                                    </div>
-                                )
-                            })
+
+                                    )
+                                    :
+                                    (
+                                        box.map((aData) => {
+                                            return (
+                                                <div className = "colorDiv" style={{background:aData.colorHex}}>
+                                                    <div>
+                                                    {aData.colorName} {aData.colorHex}
+                                                    </div>
+                                                    <div>
+                                                    {aData.probs}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    )
+
                         }
                     </div>
     

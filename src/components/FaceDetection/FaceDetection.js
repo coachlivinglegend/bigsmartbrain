@@ -14,7 +14,6 @@ class FaceDetection extends React.Component {
                             {
                                 box.map((aFace) => {
                                     const height = 510 - aFace.bottomRow - aFace.topRow
-                                    console.log(height)
                                     return (
                                         <div className="boundingBox" key={aFace.id} style={{top: aFace.topRow, right: aFace.rightCol, bottom: aFace.bottomRow, left: aFace.leftCol}}>
                                         <label className='box-label' style={{ bottom: height }}>
@@ -31,7 +30,20 @@ class FaceDetection extends React.Component {
                 <div className="model-info">Face</div>
                 <div className="outputresponse">
                     <div className="outputinfo">
-                        <div className="outputDetails"><span className="titleData">{box.length} Faces Detected.</span></div>
+                        <div className="outputDetails">
+                            {
+                                this.props.isLoading 
+                                    ? 
+                                    (
+                                        <div style={{marginTop: 30}} className='spinner-overlay'>
+                                            <div className='spinner-container' />
+                                        </div>
+
+                                    )
+                                    :
+                                        <span className="titleData">{box.length} Faces Detected.</span>
+                            }
+                        </div>
                     </div>
     
                     <input onChange={stuff} type="file" name="file" id="file" className="inputfile" accept=".jpg, .jpeg, .png"/>
