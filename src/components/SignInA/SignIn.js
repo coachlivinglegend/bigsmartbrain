@@ -8,7 +8,7 @@ class SignIn extends React.Component {
         super(props);
         this.state = {
             signInEmail: '',
-            signInPassword: ''
+            signInPassword: '',
         }
     }
 
@@ -26,9 +26,17 @@ class SignIn extends React.Component {
             if (thisUser.id)  {
                 this.props.loadUser(thisUser)
                 this.props.onRouteChange('home')
+            } else if (thisUser == "incorrect password") {
+                const output = document.getElementById("passwordHelp")
+                output.textContent = "Incorrect Password."
+                output.style.color = "red";
+            } else if (thisUser == "incorrect email.") {
+                const output = document.getElementById("passwordHelp")
+                output.textContent = "Email does not exist."
+                output.style.color = "red";
             } else {
                 const output = document.getElementById("passwordHelp")
-                output.textContent = "Username or password incorrect."
+                output.textContent = "Check your network connection."
                 output.style.color = "red";
             }
         })

@@ -38,6 +38,7 @@ const initialState = {
     route: '',
     user: {
       id: '',
+      rank: '',
       name: '',
       email: '',
       entries: 0,
@@ -54,6 +55,7 @@ class App extends React.Component {
     this.setState({
       user: {
         id: data.id,
+        rank: data.rank,
         name: data.name,
         email: data.email,
         entries: data.entries,
@@ -509,7 +511,8 @@ renderSwitch = (param) => {
     return (
     <Home
       name={this.state.user.name}
-      rank={this.state.user.entries}
+      rank={this.state.user.rank}
+      entries={this.state.user.entries}
       boxFace={this.state.boxFace}
       boxCeleb={this.state.boxCeleb}
       boxApp={this.state.boxApp}

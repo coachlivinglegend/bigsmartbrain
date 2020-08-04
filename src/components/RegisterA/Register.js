@@ -41,11 +41,14 @@ class Register extends React.Component {
             if (user.id) {
                 this.props.loadUser(user)
                 this.props.onRouteChange('signin')
-                // this.props.onRouteChange('home')
-            } else {
+            } else if (user == 'unable to register') {
                 let validityMessage = "";
                 validityMessage = "Email address already exists.";
                 document.getElementById("emailHelp").textContent = validityMessage;
+            } else if (user == 'incorrect form submission') {
+                const output = document.getElementById("passwordHelp");
+                output.textContent = `You cannot leave any field empty.`
+                output.style.color = "red";
             }
         })
 

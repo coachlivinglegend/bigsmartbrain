@@ -173,7 +173,10 @@ class Home extends React.Component {
                         <h1>Welcome, {this.props.name}!</h1>
                     </div>
 
-                    <div style={{textAlign: "center"}}><h2>You have successfully submitted <span>{this.props.rank}</span> entries.</h2></div>
+                    <div style={{textAlign: "center"}}>
+                    <h2>You have successfully submitted <span>{this.props.entries}</span> entries.</h2>
+                    <h2>This ranks you as number <span>{this.props.rank}</span> on the website.</h2>                        
+                    </div>
 
                     {   
                         this.navRenderSwitch(this.state.navRoute)     
